@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# TODO: remove double quotes to run commnad in more native form
 # TODO: add silent mode
 # TODO: fix -p option in the "read -t"
 # TODO: add list of changed files
