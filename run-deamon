@@ -1,3 +1,9 @@
+#!/usr/bin/env bash
+# TODO: add silent mode
+# TODO: fix -p option in the "read -t"
+# TODO: add list of changed files
+# TODO: add option check known ports if they is not binded before run sever
+
 pid=""
 pidlist=()
 exec 2>&1
