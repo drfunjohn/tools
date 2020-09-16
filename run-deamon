@@ -40,7 +40,7 @@ function pstree {
 
 $1 &
 pid=$!
-fswatch -r --event=Updated -l 3 -o -e ".*" -i "\\.go$" . | (while read line
+fswatch -r --event=Updated -l 3 -o -e ".*" -i "\\.go$" -i "\\.mod$" -iI "/makefile" . | (while read line
 do
     pidlist=( $( pstree $pid ) )
     clear
