@@ -1,13 +1,22 @@
 #!/bin/bash
 # upgrade installed helm by using localy 
 # "make helm" and  "helm upgrade"
+# Version is used from .next-version
+# .next-version: 
+# release next-version --allow-current > .next-version
+# TODO add automaticaly deploy to each environment (menu) with correct host
+# value (ingress.host)
 exec 5>&1
 SEPARATOR="--------------------------------------------------------------------------------"
-version=$(git tag --sort=-committerdate | head -n 1)
-version=${version:1}
+# version=$(git tag --sort=-committerdate | head -n 1)
+# version=${version:1}
+version=$(cat .next-version) # the same as in the Makefile
 echo "$SEPARATOR" 
 echo "1. Create helm version $version"
-REGEXP="Successfully packaged chart.*:[[:space:]](dist/(.*)-$version.tgz)"
+# exmple:
+# Successfully packaged chart and saved it to: dist/sensor-simulator-1.4.1.tgz
+REGEXP="Successfully packaged chart.*:[[:space:]](dist/(.*)-.*\.tgz)"
+# version can be overrided
 result=$(make helm VERSION=$version | tee >(cat - >&5) | tail -1)
 [[ $result =~ $REGEXP ]] 
 chart="${BASH_REMATCH[1]}"
