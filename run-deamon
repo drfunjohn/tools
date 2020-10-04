@@ -39,19 +39,20 @@ function pstree {
 }
 
 $1 &
-pid=$!
-fswatch -r --event=Updated -l 3 -o -e ".*" -i "\\.go$" -i "\\.mod$" -iI "/makefile" . | (while read line
+pid=$! 
+wait=3 # secoinds
+fswatch -r --event=Updated --event=Removed --event=Created -l $wait -o -e ".*" -i "\\.go$" -i "\\.mod$" -iI "/makefile" . | (while read line
 do
     pidlist=( $( pstree $pid ) )
     clear
     echo "== Run Deamon: Restart service ============================================="
     if [[ "$line" -gt "1" ]]; then 
-        echo "$line fils were changed"
+        echo "$line files were changed"
     else 
         echo "$line file was changed"
     fi
     echo "Kill ${#pidlist[@]} processes with  next PIDs:  ${pidlist[@]}"
-    echo "Wait 5 sec..."
+    echo "Wait $wait sec..."
     read -t 5 -s
     if [[ "${#pidlist[@]}" -gt "0" ]]; then 
         for p in ${pidlist[@]} 
