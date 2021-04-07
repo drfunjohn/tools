@@ -5,6 +5,8 @@
 # TODO: add list of changed files
 # TODO: add option check known ports if they is not binded before run sever
 
+wait=1 # seconds, delay before kill of process 
+
 pid=""
 pidlist=()
 exec 2>&1
@@ -40,8 +42,7 @@ function pstree {
 
 $1 &
 pid=$! 
-wait=3 # secoinds
-fswatch -r --event=Updated --event=Removed --event=Created -l $wait -o -e ".*" -i "\\.go$" -i "\\.mod$" -iI "/makefile" . | (while read line
+fswatch -r --event=Updated --event=Removed --event=Created -l 1 -o -e "\\.*" -i "\\.go$" -i "\\.mod$" -iI "/makefile" -i "\\.py$" . | (while read line
 do
     pidlist=( $( pstree $pid ) )
     clear
