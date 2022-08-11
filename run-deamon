@@ -5,6 +5,8 @@
 # TODO: add list of changed files
 # TODO: add option check known ports if they is not binded before run sever
 
+update_tests="kubectl cp ${PWD}/. wret:/"
+
 wait=1 # seconds, delay before kill of process 
 
 pid=""
@@ -42,7 +44,7 @@ function pstree {
 
 $1 &
 pid=$! 
-fswatch -r --event=Updated --event=Removed --event=Created -l 1 -o -e "\\.*" -i "\\.go$" -i "\\.mod$" -iI "/makefile" -i "\\.py$" . | (while read line
+fswatch -r --event=Updated --event=Removed --event=Created -l 1 -o -e "\\.*" -i "\\.go$" -i "\\.mod$" -iI "/makefile" -i "\\.py$" -i "\\.robot$" . | (while read line
 do
     pidlist=( $( pstree $pid ) )
     clear
@@ -63,6 +65,7 @@ do
     fi
     pid=""
     pidlsit=()
+    $update_tests
     $1 &
     pid=$!
     echo "== Run Deamon: Service started ============================================="
