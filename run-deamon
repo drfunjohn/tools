@@ -44,7 +44,14 @@ function pstree {
 
 $1 &
 pid=$! 
-fswatch -r --event=Updated --event=Removed --event=Created -l 1 -o -e "\\.*" -i "\\.go$" -i "\\.mod$" -iI "/makefile" -i "\\.py$" -i "\\.robot$" . | (while read line
+fswatch -r --event=Updated --event=Removed --event=Created -l 1 -o \
+  -e "\\.*" \
+  -i "\\.go$" \
+  -i "\\.mod$" \
+  -iI "/makefile" \
+  -i "\\.py$" \
+  -i "\\.robot$" \
+  . | (while read line
 do
     pidlist=( $( pstree $pid ) )
     clear
