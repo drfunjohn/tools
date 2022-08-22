@@ -5,7 +5,11 @@
 # TODO: add list of changed files
 # TODO: add option check known ports if they is not binded before run sever
 
-update_tests="kubectl cp ${PWD}/. wret:/"
+function update_tests {
+  echo = Copy tests to container =
+  kubectl cp ${PWD}/. wret:/
+}
+
 
 wait=1 # seconds, delay before kill of process 
 
@@ -42,6 +46,9 @@ function pstree {
     echo "${pids[@]}"
 }
 
+update_tests
+echo = Execute tests: =
+echo "$1"
 $1 &
 pid=$! 
 fswatch -r --event=Updated --event=Removed --event=Created -l 1 -o \
@@ -72,7 +79,9 @@ do
     fi
     pid=""
     pidlsit=()
-    $update_tests
+    update_tests
+    echo = Execute tests: =
+    echo "$1"
     $1 &
     pid=$!
     echo "== Run Deamon: Service started ============================================="
