@@ -1,0 +1,89 @@
+configSet=1
+{
+    "policies": {
+        "${policies}/internal.tgz": {
+            "import_filename": "${policies}/internal.tgz",
+            "vs_info": {
+                "profile1": {
+                    "vs_name": "my-vs-test4-my-route",
+                    "logging": {
+                        "dest_ip": "",
+                        "dest_port": "",
+                        "dest_filename": "stdout",
+                        "$ref": "${log_profiles}/simple-profile.tgz"
+                    }
+                },
+                "profile2": {
+                    "vs_name": "my-vs-test4-test1",
+                    "logging": {
+                        "dest_ip": "",
+                        "dest_port": "",
+                        "dest_filename": "stderr",
+                        "$ref": "${log_profiles}/internal.tgz"
+                    }
+                },
+                "profile3": {
+                    "vs_name": "my-vs-test4-my-route",
+                    "logging": {
+                        "dest_ip": "",
+                        "dest_port": "",
+                        "dest_filename": "stderr",
+                        "$ref": "${log_profiles}/internal.tgz"
+                    }
+                },
+                "profile4": {
+                    "vs_name": "webserver-vs-webserver-root-http",
+                    "logging": {
+                        "dest_ip": "",
+                        "dest_port": "",
+                        "dest_filename": "stderr",
+                        "$ref": "${log_profiles}/internal.tgz"
+                    }
+                }
+            }
+        },
+        "${policies}/simple_policy.tgz": {
+            "import_filename": "${policies}/simple_policy.tgz"
+        }
+    }
+}
+configSet=2
+{
+    "policies": {
+        "${policies}/internal.tgz": {
+            "import_filename": "${policies}/internal.tgz",
+            "vs_info": {
+                "profile1": {
+                    "vs_name": "my-vs-test4-test1",
+                    "logging": {
+                        "dest_ip": "",
+                        "dest_port": "",
+                        "dest_filename": "stderr",
+                        "$ref": "${log_profiles}/internal.tgz"
+                    }
+                },
+                "profile2": {
+                    "vs_name": "my-vs-test4-my-route",
+                    "logging": {
+                        "dest_ip": "",
+                        "dest_port": "",
+                        "dest_filename": "stderr",
+                        "$ref": "${log_profiles}/internal.tgz"
+                    }
+                },
+                "profile3": {
+                    "vs_name": "webserver-vs-webserver-root-http",
+                    "logging": {
+                        "dest_ip": "",
+                        "dest_port": "",
+                        "dest_filename": "stderr",
+                        "$ref": "${log_profiles}/internal.tgz"
+                    }
+                }
+            }
+        },
+        "${policies}/simple_policy.tgz": {
+            "import_filename": "${policies}/simple_policy.tgz"
+        }
+    }
+}

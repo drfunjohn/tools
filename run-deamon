@@ -58,6 +58,7 @@ fswatch -r --event=Updated --event=Removed --event=Created -l 1 -o \
   -iI "/makefile" \
   -i "\\.py$" \
   -i "\\.robot$" \
+  -i "startup\\.sh" \
   . | (while read line
 do
     pidlist=( $( pstree $pid ) )
